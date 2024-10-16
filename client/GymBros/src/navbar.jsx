@@ -25,11 +25,12 @@ function Navbar() {
                                 <Link to="/plans">Our Plans</Link>
                             </li>
                             <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                                <Link to="/about">About</Link>
+                                <Link to="/explore">Explore</Link>
                             </li>
                             <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                                <Link to="/contact">Contact</Link>
+                                <Link to="/about">About</Link>
                             </li>
+                            
                         </ul>
                     </div>
                     <div className="hidden lg:flex lg:items-center gap-x-2 ml-6">                        
@@ -42,7 +43,8 @@ function Navbar() {
                             </Link>
                         </SignedOut>
                         <SignedIn>
-                            <UserButton />
+                            <Link to='/dash' className=' text-white p-3'>Profile</Link>
+                            <UserButton />                            
                         </SignedIn>
                     </div>
                     <div className="flex items-center justify-center lg:hidden">

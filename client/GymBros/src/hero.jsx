@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Gymvideo1 from './gymvdo1.mp4';
 import Gymvideo2 from './gymvdo2.mp4';
 import Gymvideo3 from './gymvdo3.mp4';
+import { useUser } from '@clerk/clerk-react'
 
 function HeroSection() {
   const videoRef = useRef(null);
@@ -31,6 +32,8 @@ function HeroSection() {
     }
   }, [currentVideoIndex, videos]);
 
+  const { isSignedIn, user, isLoaded } = useUser();
+
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Background video */}
@@ -42,10 +45,10 @@ function HeroSection() {
         loop={false}  // Disable loop for sequential playback
         muted={true}  // Mute the video to allow autoplay
       />
-
+  
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
-
+  
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <h1 className="text-4xl lg:text-6xl font-bold mb-4">
@@ -60,9 +63,17 @@ function HeroSection() {
             placeholder="Enter your email"
             className="px-4 py-2 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
-          <button className="px-6 py-2 bg-[#eb5e28] text-white rounded-md font-semibold hover:bg-orange-600 transition duration-200">
-            Get Started
-          </button>
+          
+          {/* Conditional button based on user authentication status */}
+          {user ? (
+            <a className="px-6 py-2 bg-[#eb5e28] text-white rounded-md font-semibold hover:bg-orange-600 transition duration-200" href='/explore'>
+              Get Started
+            </a>
+          ) : (
+            <a className="px-6 py-2 bg-[#eb5e28] text-white rounded-md font-semibold hover:bg-orange-600 transition duration-200" href='/login'>
+              Get Started
+            </a>
+          )}
         </div>
       </div>
     </div>

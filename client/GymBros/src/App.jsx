@@ -6,7 +6,14 @@ import {dark} from '@clerk/themes'
 import { ClerkProvider } from '@clerk/clerk-react';
 import Signup from './Signup';
 import Signin from './singin';
-import Profile from './profile';
+import Dash from './dash';
+import Prices from './prices';
+import Cards from './cards';
+import CircularButtons from './choose';
+import Diet2 from './getdiet';
+import CalDiet from './caldiet'
+import Visit from './visit';
+import List from './list';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -26,10 +33,13 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/plans" element={<Plans />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route path="/explore" element={<Explore />} />
                 <Route path="/login" element={<Signin/>} />
                 <Route path="/signin" element={<Signup />} />  
-                <Route path="/profile" element={<Profile />} />  
+                <Route path="/dash" element={<Dash />} />
+                <Route path="/diet" element={<Diet />} />
+                <Route path="/workout" element={<Workout />} />
+                <Route path="/schedule" element={<Schedule />} />  
             </Routes>
         </Router>
         </ClerkProvider>
@@ -44,16 +54,56 @@ function Home() {
     );
 }
 
+function Explore() {
+    return (
+        <div>
+            <CircularButtons />
+        </div>
+    );
+}
+
 function Plans() {
-    return <div>Our Plans Page</div>;
+    return (
+        <div>
+            <Prices />
+            <Cards />
+        </div>
+    );
 }
 
 function About() {
-    return <div>About Page</div>;
+    return (
+        <div>
+            <Visit />
+        </div>
+    );
 }
 
-function Contact() {
-    return <div>Contact Page</div>;
+
+
+function Diet() {
+    return (
+        <div>
+            <Diet2 />
+            <CalDiet />
+        </div>
+    );
+}
+
+function Workout() {
+    return (
+        <div>
+            Workout
+        </div>
+    );
+}
+
+function Schedule() {
+    return (
+        <div>
+            <List />
+        </div>
+    );
 }
 
 export default App;
