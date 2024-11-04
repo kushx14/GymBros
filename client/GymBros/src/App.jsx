@@ -1,19 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './navbar';
-import HeroSection from './hero';
+import Home from './Home/home';
 import {dark} from '@clerk/themes'
 import { ClerkProvider } from '@clerk/clerk-react';
 import Signup from './Signup';
 import Signin from './singin';
-import Dash from './dash';
-import Prices from './prices';
-import Cards from './cards';
-import CircularButtons from './choose';
-import Diet2 from './getdiet';
-import CalDiet from './caldiet'
-import Visit from './visit';
-import List from './list';
+import Dash from './Profile/dash';
+import Plans from './Plans/plans';
+import Explore from './Explore/explore';
+import Diet from './Diet/diet';
+import About from './About/about';
+import Schedule from './Schedule/schedule';
+import Workout from './Workout/workout';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -46,64 +45,6 @@ function App() {
     );
 }
 
-function Home() {
-    return (
-        <div>
-            <HeroSection />
-        </div>
-    );
-}
 
-function Explore() {
-    return (
-        <div>
-            <CircularButtons />
-        </div>
-    );
-}
-
-function Plans() {
-    return (
-        <div>
-            <Prices />
-            <Cards />
-        </div>
-    );
-}
-
-function About() {
-    return (
-        <div>
-            <Visit />
-        </div>
-    );
-}
-
-
-
-function Diet() {
-    return (
-        <div>
-            <Diet2 />
-            <CalDiet />
-        </div>
-    );
-}
-
-function Workout() {
-    return (
-        <div>
-            Workout
-        </div>
-    );
-}
-
-function Schedule() {
-    return (
-        <div>
-            <List />
-        </div>
-    );
-}
 
 export default App;

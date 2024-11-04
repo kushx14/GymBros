@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './profile';
-import Kush from './kush.jpg';
+import Kush from '.././assets/kush.jpg';
 import { useUser } from '@clerk/clerk-react'
 
 

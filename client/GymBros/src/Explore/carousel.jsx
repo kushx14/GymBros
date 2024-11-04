@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Vid from "./vdo.mp4";
-import Vid2 from "./vdo2.mp4";
-import Vid3 from "./vdo3.mp4";
+import Vid from ".././assets/vdo.mp4";
+import Vid2 from ".././assets/vdo2.mp4";
+import Vid3 from ".././assets/vdo3.mp4";
 
 const CarouselComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);

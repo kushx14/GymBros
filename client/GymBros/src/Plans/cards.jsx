@@ -1,5 +1,5 @@
 import React from 'react';
-import logimg from './loginimg.jpg';
+import logimg from '.././assets/loginimg.jpg';
 
 // Import the Lobster font
 import '@fontsource/lobster';

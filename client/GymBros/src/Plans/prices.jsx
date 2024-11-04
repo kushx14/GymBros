@@ -1,5 +1,5 @@
 import React from 'react';
-import loginimg from './loginimg.jpg'; // Ensure this path is correct
+import loginimg from '.././assets/loginimg.jpg'; // Ensure this path is correct
 
 function Prices() {
   return (

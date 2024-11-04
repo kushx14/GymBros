@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Chicken from './chicken.webp'
-import Salad from  './salad.webp'
+import Chicken from '.././assets/chicken.webp'
+import Salad from  '.././assets/salad.webp'
 
 export default function Component() {
   const [dietType, setDietType] = useState('veg');

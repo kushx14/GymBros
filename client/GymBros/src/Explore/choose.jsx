@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Diet from './food.png';
-import Plan from './schedule.jpg';
-import Bgch from './Designer.png';
+import Diet from '.././assets/food.png';
+import Plan from '.././assets/schedule.jpg';
+import Bgch from '.././assets/Designer.png';
 import Footer from './footer';
 import Car from './carousel';
-import Body from './body.jpg';
+import Body from '.././assets/body.jpg';
 const CircularButtons = () => {
   const words = [
     "Hey, Choose the Program that",

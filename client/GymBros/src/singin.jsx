@@ -1,5 +1,5 @@
 import { SignIn } from '@clerk/clerk-react'
-import logimg from './loginimg.jpg'
+import logimg from './assets/loginimg.jpg'
 
 export default function Signin(){
     return (

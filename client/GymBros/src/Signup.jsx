@@ -1,6 +1,6 @@
 import { SignUp } from '@clerk/clerk-react'
-import signimg from './darkgym.jpg';
-import bgg from './loginimg.jpg';
+import signimg from './assets/darkgym.jpg';
+import bgg from './assets/loginimg.jpg';
 
 export default function Signup(){
     return (

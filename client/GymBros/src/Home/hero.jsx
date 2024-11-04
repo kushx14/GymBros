@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Gymvideo1 from './gymvdo1.mp4';
-import Gymvideo2 from './gymvdo2.mp4';
-import Gymvideo3 from './gymvdo3.mp4';
+import Gymvideo1 from '.././assets/gymvdo1.mp4';
+import Gymvideo2 from '.././assets/gymvdo2.mp4';
+import Gymvideo3 from '.././assets/gymvdo3.mp4';
 import { useUser } from '@clerk/clerk-react'
 
 function HeroSection() {
