@@ -1,45 +1,52 @@
-"use client";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Chicken from '.././assets/chicken.webp';
+import Salad from '.././assets/salad.webp';
 
-const vegetarianDiet = [
-  { name: "Greek Yogurt with Berries", calories: 150, protein: 15, carbs: 20, fat: 5 },
-  { name: "Lentil Soup", calories: 200, protein: 12, carbs: 30, fat: 3 },
-  { name: "Quinoa Salad", calories: 250, protein: 8, carbs: 40, fat: 8 },
-  { name: "Vegetable Stir-Fry with Tofu", calories: 300, protein: 15, carbs: 25, fat: 12 },
-  { name: "Chickpea Curry", calories: 350, protein: 10, carbs: 45, fat: 15 },
-];
+const PUBLISHABLE_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
-const nonVegetarianDiet = [
-  { name: "Grilled Chicken Breast", calories: 200, protein: 30, carbs: 0, fat: 5 },
-  { name: "Salmon with Roasted Vegetables", calories: 350, protein: 25, carbs: 15, fat: 20 },
-  { name: "Turkey and Avocado Wrap", calories: 400, protein: 20, carbs: 30, fat: 15 },
-  { name: "Beef Stir-Fry", calories: 450, protein: 35, carbs: 20, fat: 25 },
-  { name: "Egg White Omelette with Spinach", calories: 200, protein: 20, carbs: 5, fat: 8 },
-];
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
 
-const Component = () => {
+export default function Caldiet() {
   const [dietType, setDietType] = useState('veg');
   const [height, setHeight] = useState(170);
   const [weight, setWeight] = useState(70);
+  const [age, setAge] = useState(25);
   const [dietItems, setDietItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const calculateBMR = () => {
-    const bmr = 10 * weight + 6.25 * height - 5 * 25 + (dietType === 'veg' ? -161 : 5);
-    return Math.round(bmr);
+    return 10 * weight + 6.25 * height - 5 * age + (dietType === 'veg' ? -161 : 5);
   };
 
-  const handleGetResult = () => {
+  const handleGetResult = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+    setError(null);
+    try {
       const bmr = calculateBMR();
-      const targetCalories = bmr * 1.2;
-      const diet = dietType === 'veg' ? vegetarianDiet : nonVegetarianDiet;
-      const selectedItems = diet.sort(() => 0.5 - Math.random()).slice(0, 3);
-      setDietItems(selectedItems);
-      setIsLoading(false);
-    }, 1500);
+      const targetCalories = 1000 - (bmr * 0.25); // assuming moderate activity level
+      console.log(targetCalories);
+      const cuisine = dietType == 'veg' ? 'lacto-vegetarian' : 'paleo';
+      console.log(cuisine)
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${PUBLISHABLE_KEY}&maxCalories=${targetCalories}&diet=${cuisine}&number=50`
+      );
+
+      if (!response.ok) throw new Error('Failed to fetch data');
+
+      const data = await response.json();
+      const shuffledItems = data.results.sort(() => Math.random() - 0.5);
+      const randomFiveItems = shuffledItems.slice(0, 5);
+
+      setDietItems(randomFiveItems);
+      console.log(randomFiveItems);
+    } catch (err) {
+      setError('Failed to fetch recommendations. Please try again.');
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -51,21 +58,50 @@ const Component = () => {
         className="bg-gradient-to-br from-[#1e1e1e] to-[#2a2a2a] text-white p-8 rounded-2xl shadow-2xl max-w-2xl w-full border border-orange-500/20"
       >
         <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 mb-8 text-center">
-          Diet Recommendations
+          Fitness Planner
         </h1>
 
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4 text-center text-white">Your Input</h2>
-          <p className="text-center">
-            Diet Type: <span className="font-bold text-orange-400">{dietType === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'}</span>
-          </p>
-          <p className="text-center">
-            Height: <span className="font-bold text-orange-400">{height} cm</span>
-          </p>
-          <p className="text-center">
-            Weight: <span className="font-bold text-orange-400">{weight} kg</span>
-          </p>
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold mb-6 text-center text-white">Choose Your Diet</h2>
+          <div className="flex justify-center space-x-6">
+            <DietButton
+              type="veg"
+              selected={dietType === 'veg'}
+              onClick={() => setDietType('veg')}
+              imageSrc={Salad}
+            >
+              Vegetarian
+            </DietButton>
+            <DietButton
+              type="non-veg"
+              selected={dietType === 'non-veg'}
+              onClick={() => setDietType('non-veg')}
+              imageSrc={Chicken}
+            >
+              Non-Vegetarian
+            </DietButton>
+          </div>
         </div>
+
+        <SliderSection
+          title="Your Height"
+          value={height}
+          onChange={setHeight}
+          min={120}
+          max={220}
+          step={1}
+          unit="cm"
+        />
+
+        <SliderSection
+          title="Your Weight"
+          value={weight}
+          onChange={setWeight}
+          min={30}
+          max={170}
+          step={1}
+          unit="kg"
+        />
 
         <div className="flex justify-center mt-6 mb-8">
           <motion.button
@@ -79,6 +115,7 @@ const Component = () => {
           </motion.button>
         </div>
 
+        {error && <p className="text-center text-red-500 mb-4">{error}</p>}
         <AnimatePresence>
           {dietItems.length > 0 && (
             <motion.div
@@ -97,11 +134,8 @@ const Component = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="bg-[#2a2a2a] p-4 rounded-lg shadow-md"
                   >
-                    <h3 className="text-lg font-semibold mb-2 text-orange-400">{item.name}</h3>
-                    <p>Calories: {item.calories}</p>
-                    <p>Protein: {item.protein}g</p>
-                    <p>Carbs: {item.carbs}g</p>
-                    <p>Fat: {item.fat}g</p>
+                    <h3 className="text-lg font-semibold mb-2 text-orange-400">{item.title}</h3>
+                    {/* Add more details if available */}
                   </motion.div>
                 ))}
               </div>
@@ -111,6 +145,80 @@ const Component = () => {
       </motion.div>
     </div>
   );
-};
+}
 
-export default Component;
+function DietButton({ type, selected, onClick, imageSrc, children }) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      className={`flex flex-col items-center p-6 rounded-xl transition-all duration-300 ${
+        selected
+          ? 'bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg'
+          : 'bg-[#2a2a2a] hover:bg-[#333333] shadow-md'
+      }`}
+    >
+      <img src={imageSrc} alt={type} className={`mb-3 ${type === 'veg' ? 'w-16 h-16' : 'w-20 h-20'}`} />
+      <span className="text-lg font-semibold">{children}</span>
+    </motion.button>
+  );
+}
+
+function SliderSection({ title, value, onChange, min, max, step, unit }) {
+  const [displayValue, setDisplayValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => onChange(displayValue), 100);
+    return () => clearTimeout(timer);
+  }, [displayValue, onChange]);
+
+  return (
+    <div className="mb-10">
+      <h2 className="text-2xl font-semibold mb-4 text-center text-white">{title}</h2>
+      <div className="relative">
+        <Slider
+          value={displayValue}
+          onValueChange={setDisplayValue}
+          min={min}
+          max={max}
+          step={step}
+        />
+        <div className="absolute left-0 right-0 -bottom-6 px-2 flex justify-between text-xs text-gray-400">
+          <span>{min}</span>
+          <span>{max}</span>
+        </div>
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={displayValue}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
+          className="mt-6 text-center text-2xl font-bold text-orange-400"
+        >
+          {displayValue} {unit}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function Slider({ value, onValueChange, min, max, step }) {
+  const handleChange = (e) => {
+    onValueChange(Number(e.target.value));
+  };
+
+  return (
+    <input
+      type="range"
+      value={value}
+      onChange={handleChange}
+      min={min}
+      max={max}
+      step={step}
+      className="w-full cursor-pointer"
+    />
+  );
+}

@@ -13,6 +13,7 @@ import Diet from './Diet/diet';
 import About from './About/about';
 import Schedule from './Schedule/schedule';
 import Workout from './Workout/workout';
+import Scraping from './Scraping/scraping';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -38,7 +39,8 @@ function App() {
                 <Route path="/dash" element={<Dash />} />
                 <Route path="/diet" element={<Diet />} />
                 <Route path="/workout" element={<Workout />} />
-                <Route path="/schedule" element={<Schedule />} />  
+                <Route path="/schedule" element={<Schedule />} /> 
+                <Route path="/scraping" element={<Scraping />} /> 
             </Routes>
         </Router>
         </ClerkProvider>

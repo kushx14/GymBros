@@ -22,4 +22,23 @@ const addUser = async (req, res) => {
     }
 }
 
-module.exports = { addUser };
+const checkUser = async (req, res) => {
+    try {
+      console.log("HERE")  
+      const { userId } = req.params;
+      console.log("ggz "+userId);
+      const user = await User.findOne({ userId });
+  
+      if (user) {
+        return res.json({ exists: true });
+      } else {
+        return res.json({ exists: false });
+      }
+    } catch (err) {
+      console.error('Error checking user existence:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+};
+  
+
+module.exports = { addUser,checkUser };
