@@ -27,7 +27,7 @@ function App() {
             baseTheme: dark,
           }}
           publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/" >
-        <Router>
+        <Router className=" overflow-hidden">
             <Navbar/>
             <Routes>
                 <Route path="/" element={<Home />} />

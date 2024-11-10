@@ -107,9 +107,6 @@ function Dash() {
             <Profile />
             </div>
           </div>
-          <div className="flex flex-col flex-1 overflow-y-auto pt-6">
-            <Scraping />
-          </div>
         </div>
       ) : null}
     </div>
