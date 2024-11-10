@@ -1,0 +1,7 @@
+.calendar-component td {
+    transition: background-color 0.2s ease;
+  }
+  
+  .calendar-component td:hover {
+    background-color: #ea580c; /* Tailwind's orange-600 color */
+  }

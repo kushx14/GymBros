@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 
 function Scraping() {
-  // Define state to store fetched data
   const [data, setData] = useState(null);
   const [data1, setData1] = useState(null);
   const [data2, setData2] = useState(null);
   const [error, setError] = useState(null);
   const { user } = useUser();
 
-  // Fetch data from the API on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
