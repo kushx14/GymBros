@@ -17,7 +17,7 @@ import Scraping from './Scraping/scraping';
 import Chest from './Workout/Chest';
 import Abs from './Workout/Abs';
 import Biceps from './Workout/Biceps';
-import Legs from './Workout/Chest';
+import Legs from './Workout/Legs';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -48,7 +48,7 @@ function App() {
                 <Route path="/workout/chest" element={<Chest />} />
                 <Route path="/workout/biceps" element={<Biceps />} />
                 <Route path="/workout/abs" element={<Abs />} />
-                <Route path="/workout/legs" element={<Legs />} />
+                <Route path="/workout/legs" element={<Legs/>}/>
             </Routes>
         </Router>
         </ClerkProvider>
