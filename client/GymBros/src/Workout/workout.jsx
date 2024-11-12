@@ -1,9 +1,10 @@
 import React from 'react'
+import MuscleMap from './MuscleMap';
 
 function Workout() {
     return (
         <div>
-            Workout
+           <MuscleMap />
         </div>
     );
 }
