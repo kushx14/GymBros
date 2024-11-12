@@ -11,7 +11,7 @@ function Scraping() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3500/scrape-gym-stats');
+        const response = await fetch('https://gymbros-our8.onrender.com/scrape-gym-stats');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

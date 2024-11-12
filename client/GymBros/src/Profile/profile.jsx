@@ -50,7 +50,7 @@ export default function Charts() {
       const fetchData = async () => {
         try {
           console.log(user.id);
-          const response = await fetch('http://localhost:3500/getfitnessdata', {
+          const response = await fetch('https://gymbros-our8.onrender.com/getfitnessdata', {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json', 

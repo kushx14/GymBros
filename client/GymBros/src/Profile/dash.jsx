@@ -11,7 +11,7 @@ function Dash() {
       if (isSignedIn && user) {
         try {
           // Check if the user already exists by sending a GET request
-          const response = await fetch(`http://localhost:3500/checkUser/${user.id}`, {
+          const response = await fetch(`https://gymbros-our8.onrender.com/checkUser/${user.id}`, {
             method: 'GET',
           });
 
@@ -31,7 +31,7 @@ function Dash() {
               name: user.fullName,
             };
 
-            const addUserResponse = await fetch('http://localhost:3500/addUser', {
+            const addUserResponse = await fetch('https://gymbros-our8.onrender.comaddUser', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
