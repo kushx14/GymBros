@@ -12,3 +12,10 @@
 - **Progress Tracker**: Record and visualize your workout and health progress.
 - **Subscription Service**: Access exclusive, tailored diet plans and workout resources.
 - **Future Expansion**: Plans to integrate with local gyms for exclusive deals based on subscription level.
+
+## Technologies
+
+- **Frontend**: React for interactive user interfaces
+- **Backend**: Node.js with Express for robust server operations
+- **Database**: MongoDB for data storage
+- **Authentication**: Clerk JS
