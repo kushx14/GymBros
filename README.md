@@ -2,7 +2,7 @@
 
 # GymBros
 
-**GymBros** is a comprehensive fitness platform designed to be an all-in-one guide and virtual coach for users. This website empowers users to explore workouts, plan meals, track fitness progress, and much more. With a mix of free and subscription-based features, GymBros aims to become an essential resource for anyone on a fitness journey.
+**GymBros** is a fitness platform designed to be an all-in-one guide and virtual coach for users. This website empowers users to explore workouts, plan meals, track fitness progress, and much more. With a mix of free and subscription-based features, GymBros aims to become an essential resource for anyone on a fitness journey.
 
 ## Features
 
